@@ -17,18 +17,15 @@ func PrintSurah(surahNo int) {
 	// fmt.Println(data.ChaptersPayload[surahNo].TotalVerses)
 	// fmt.Println(verseRange)
 
-	// lipgloss.NewStyle().
-	// 	Foreground(lipgloss.Color("#04B575")).
-	// 	Render(
-	// )
 	fmt.Println(
 
 		lipgloss.NewStyle().
-			Foreground(lipgloss.Color("#04B575")).
+			Foreground(lipgloss.Color(data.ThemeColor)).
 			Bold(true).
 			Render(
 				fmt.Sprintf(
-					"\nSurah %v (%v) | %v",
+					"\nSurah %v | %v (%v) | %v",
+					data.QuranPayload[surahNo-1].Id,
 					data.QuranPayload[surahNo-1].Transliteration,
 					data.QuranPayload[surahNo-1].Translation,
 					data.QuranPayload[surahNo-1].Type,

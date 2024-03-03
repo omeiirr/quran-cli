@@ -70,7 +70,6 @@ func ListSurahs() {
 			surah.Name,
 			fmt.Sprintf(surah.Transliteration),
 			fmt.Sprintf(surah.Translation),
-			// fmt.Sprintf("%v (%v)", surah.Transliteration, surah.Translation),
 			fmt.Sprintf("%d", surah.TotalVerses),
 			surah.Type,
 		}
@@ -90,11 +89,11 @@ func ListSurahs() {
 		BorderForeground(lipgloss.Color("240")).
 		BorderBottom(true).
 		Bold(true).
-		Foreground(lipgloss.Color("#04B575"))
+		Foreground(lipgloss.Color(data.ThemeColor))
 
 	s.Selected = s.Selected.
 		Foreground(lipgloss.Color("#FAFAFA")).
-		Background(lipgloss.Color("#04B575")).
+		Background(lipgloss.Color(data.ThemeColor)).
 		Bold(false)
 
 	t.SetStyles(s)
@@ -111,12 +110,13 @@ func printSurah(surahNo int) {
 	fmt.Println(
 
 		lipgloss.NewStyle().
-			Foreground(lipgloss.Color("#04B575")).
+			Foreground(lipgloss.Color(data.ThemeColor)).
 			Bold(true).
 			Render(
 				fmt.Sprintf(
 
-					"\nSurah %v (%v) | %v",
+					"\nSurah %v | %v (%v) | %v",
+					data.QuranPayload[surahNo-1].Id,
 					data.QuranPayload[surahNo-1].Transliteration,
 					data.QuranPayload[surahNo-1].Translation,
 					data.QuranPayload[surahNo-1].Type,
@@ -124,18 +124,9 @@ func printSurah(surahNo int) {
 			),
 	)
 
-	// fmt.Printf("\nSurah %v", data.QuranPayload[surahNo-1].Translation)
-
-	// fmt.Println(data.QuranPayload[surahNo-1].Verses)
-
 	// Print Id and Translation of each Ayat
 	for _, ayat := range data.QuranPayload[surahNo-1].Verses {
 		fmt.Printf("%d. %s\n", ayat.Id, ayat.Translation)
 	}
 
-	// Print Id and Translation of each Ayat
-	// for i := verseRange[0]; i <= verseRange[1]; i++ {
-	// 	fmt.Printf("%d. %s\n", data.QuranPayload[surahNo].Verses[i].Id, data.QuranPayload[surahNo].Verses[i].Translation)
-
-	// }
 }
