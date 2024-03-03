@@ -1,4 +1,7 @@
-theme_color: '#04B575'
+theme_color: '#04B575' # dark green
+# theme_color: '#ff7373' # salmon
+# theme_color: '#468499' # blue
+# theme_color: '#8a2be2' # violet
 
 print_surah:
   show_arabic: false
