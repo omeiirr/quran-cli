@@ -1,0 +1,7 @@
+theme_color: '#04B575'
+
+print_surah:
+  show_arabic: false
+
+print_ayat:
+  show_arabic: false
