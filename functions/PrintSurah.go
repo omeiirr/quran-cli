@@ -27,10 +27,12 @@ func PrintSurah(surahNo int) {
 			Foreground(lipgloss.Color("#04B575")).
 			Bold(true).
 			Render(
-				"\nSurah",
-				data.QuranPayload[surahNo-1].Transliteration,
-				data.QuranPayload[surahNo-1].Translation,
-				// data.QuranPayload[surahNo-1].Type,
+				fmt.Sprintf(
+					"\nSurah %v (%v) | %v",
+					data.QuranPayload[surahNo-1].Transliteration,
+					data.QuranPayload[surahNo-1].Translation,
+					data.QuranPayload[surahNo-1].Type,
+				),
 			),
 	)
 
