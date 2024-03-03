@@ -5,6 +5,7 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/omeiirr/quran-cli/data"
+	"github.com/spf13/viper"
 )
 
 func PrintSurah(surahNo int) {
@@ -24,7 +25,7 @@ func PrintSurah(surahNo int) {
 			Bold(true).
 			Render(
 				fmt.Sprintf(
-					"\nSurah %v | %v (%v) | %v",
+					"\nSurah %v | %v (%v) | %v\n",
 					data.QuranPayload[surahNo-1].Id,
 					data.QuranPayload[surahNo-1].Transliteration,
 					data.QuranPayload[surahNo-1].Translation,
@@ -38,8 +39,15 @@ func PrintSurah(surahNo int) {
 	// fmt.Println(data.QuranPayload[surahNo-1].Verses)
 
 	// Print Id and Translation of each Ayat
+	showArabic := viper.GetBool("print_surah.show_arabic")
 	for _, ayat := range data.QuranPayload[surahNo-1].Verses {
-		fmt.Printf("%d. %s\n", ayat.Id, ayat.Translation)
+		if showArabic {
+			fmt.Printf("%s \n%d. %s\n\n", ayat.Text, ayat.Id, ayat.Translation)
+			// fmt.Printf("%d. %s\n%s\n\n", ayat.Id, ayat.Text, ayat.Translation)
+		} else {
+			fmt.Printf("%d. %s\n", ayat.Id, ayat.Translation)
+
+		}
 	}
 
 	// Print Id and Translation of each Ayat
