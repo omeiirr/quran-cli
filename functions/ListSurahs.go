@@ -3,6 +3,7 @@ package functions
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/charmbracelet/bubbles/table"
 	tea "github.com/charmbracelet/bubbletea"
@@ -34,10 +35,13 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "q", "ctrl+c":
 			return m, tea.Quit
 		case "enter":
-			return m,
-				tea.Batch(
-					tea.Printf("Opening Surah %s. . .", m.table.SelectedRow()[2]),
-				)
+			surahNo, err := strconv.Atoi(m.table.SelectedRow()[0])
+			if err != nil {
+				fmt.Println("Error:", err)
+				return m, nil
+			}
+			printSurah(surahNo)
+			return m, tea.Quit
 		}
 	}
 	m.table, cmd = m.table.Update(msg)
@@ -100,4 +104,38 @@ func ListSurahs() {
 		fmt.Println("Error running program:", err)
 		os.Exit(1)
 	}
+}
+
+func printSurah(surahNo int) {
+
+	fmt.Println(
+
+		lipgloss.NewStyle().
+			Foreground(lipgloss.Color("#04B575")).
+			Bold(true).
+			Render(
+				fmt.Sprintf(
+
+					"\nSurah %v (%v) | %v",
+					data.QuranPayload[surahNo-1].Transliteration,
+					data.QuranPayload[surahNo-1].Translation,
+					data.QuranPayload[surahNo-1].Type,
+				),
+			),
+	)
+
+	// fmt.Printf("\nSurah %v", data.QuranPayload[surahNo-1].Translation)
+
+	// fmt.Println(data.QuranPayload[surahNo-1].Verses)
+
+	// Print Id and Translation of each Ayat
+	for _, ayat := range data.QuranPayload[surahNo-1].Verses {
+		fmt.Printf("%d. %s\n", ayat.Id, ayat.Translation)
+	}
+
+	// Print Id and Translation of each Ayat
+	// for i := verseRange[0]; i <= verseRange[1]; i++ {
+	// 	fmt.Printf("%d. %s\n", data.QuranPayload[surahNo].Verses[i].Id, data.QuranPayload[surahNo].Verses[i].Translation)
+
+	// }
 }
