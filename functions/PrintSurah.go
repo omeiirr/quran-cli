@@ -43,7 +43,7 @@ func PrintSurah(surahNo int) {
 
 	// Print Id and Translation of each Ayat
 	for _, ayat := range data.QuranPayload[surahNo-1].Verses {
-		if data.Cfg.PrintAyat.ShowArabic {
+		if data.Cfg.PrintSurah.ShowArabic {
 			fmt.Printf("%s \n%d. %s\n\n", ayat.Text, ayat.Id, ayat.Translation)
 			// fmt.Printf("%d. %s\n%s\n\n", ayat.Id, ayat.Text, ayat.Translation)
 		} else {
