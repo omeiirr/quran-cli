@@ -45,7 +45,8 @@ var listCmd = &cobra.Command{
 	Press Enter to read the highlighted chapter.
 	Press q to exit the table.
 	`,
-	Args: cobra.NoArgs,
+	Args:    cobra.NoArgs,
+	Aliases: []string{"l"},
 	Run: func(cmd *cobra.Command, args []string) {
 		functions.ListSurahs()
 	},
@@ -69,7 +70,8 @@ var readCmd = &cobra.Command{
 	First argument is the chapter number.
 	Second optional argument is the verse number.	
 	`,
-	Args: cobra.RangeArgs(1, 2),
+	Args:    cobra.RangeArgs(1, 2),
+	Aliases: []string{"r"},
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			fmt.Println(`Not enough arguments. Use "quran read --help" for more`)
@@ -106,9 +108,10 @@ var readCmd = &cobra.Command{
 	},
 }
 var searchCmd = &cobra.Command{
-	Use:   "search [query]",
-	Short: "Search the Quran for verses containing a given query",
-	Long:  `Search the Quran for verses containing a given query using fzf (both fuzzy search and exact match is possible).`,
+	Use:     "search [query]",
+	Short:   "Search the Quran for verses containing a given query",
+	Long:    `Search the Quran for verses containing a given query using fzf (both fuzzy search and exact match is possible).`,
+	Aliases: []string{"s"},
 	Run: func(cmd *cobra.Command, args []string) {
 
 		exactMatch, _ := cmd.Flags().GetBool("exact")
