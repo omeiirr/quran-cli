@@ -14,8 +14,6 @@ func init() {
 	rootCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(randomCmd)
 	rootCmd.AddCommand(readCmd)
-	// rootCmd.AddCommand(chapterCmd)
-	// rootCmd.AddCommand(verseCmd)
 	rootCmd.AddCommand(versionCmd)
 }
 
@@ -72,6 +70,7 @@ var readCmd = &cobra.Command{
 		}
 
 		switch len(args) {
+
 		case 0:
 			fmt.Println("Too few arguments")
 
@@ -85,21 +84,6 @@ var readCmd = &cobra.Command{
 				return
 			}
 			functions.PrintAyat(surahNo, ayatNo)
-		// case 3:
-		// 	start, err := strconv.Atoi(args[1])
-		// 	if err != nil {
-		// 		panic(err)
-		// 	}
-		// 	end, err := strconv.Atoi(args[2])
-		// 	if err != nil {
-		// 		panic(err)
-		// 	}
-		// 	x := [2]int{start, end}
-		// 	fmt.Println(x)
-		// 	functions.PrintSurah(surahNo)
-		// for i := start; i <= end; i++ {
-		// 	functions.PrintAyat(surahNo, i)
-		// }
 
 		default:
 			fmt.Println("Too many arguments")
@@ -108,40 +92,6 @@ var readCmd = &cobra.Command{
 
 	},
 }
-
-// var chapterCmd = &cobra.Command{
-// 	Use:   "chapter -n",
-// 	Short: "Print the chapter acc to the number provided.",
-// 	Long:  `Print the chapter acc to the number provided.`,
-// 	Run: func(cmd *cobra.Command, args []string) {
-// 		// string to int
-// 		i, err := strconv.Atoi(args[0])
-// 		if err != nil {
-//
-// 			panic(err)
-// 		}
-// 		functions.PrintSurah(i)
-// 	},
-// }
-// var verseCmd = &cobra.Command{
-// 	Use:   "verse x y",
-// 	Short: "Prints verse y from chapter x.",
-// 	Long:  `Prints verse y from chapter x.`,
-// 	Run: func(cmd *cobra.Command, args []string) {
-// 		// string to int
-// 		surahNo, err := strconv.Atoi(args[0])
-// 		if err != nil {
-//
-// 			panic(err)
-// 		}
-// 		ayatNo, err := strconv.Atoi(args[1])
-// 		if err != nil {
-//
-// 			panic(err)
-// 		}
-// 		functions.PrintAyat(surahNo, ayatNo)
-// 	},
-// }
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
