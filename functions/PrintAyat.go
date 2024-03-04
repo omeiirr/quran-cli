@@ -7,7 +7,7 @@ import (
 	"github.com/omeiirr/quran-cli/data"
 )
 
-func PrintAyat(surahNo int, ayatNo int) {
+func PrintAyat(surahNo int, ayatNo int, showArabic bool) {
 
 	if surahNo < 1 || surahNo > 114 {
 		fmt.Println("Chapter not found; enter a valid chapter number between 1 to 114")
@@ -31,7 +31,7 @@ func PrintAyat(surahNo int, ayatNo int) {
 			),
 	)
 
-	if data.Cfg.PrintAyat.ShowArabic {
+	if data.Cfg.PrintAyat.ShowArabic || showArabic {
 
 		fmt.Printf(
 			"\n%v\n%v\n",

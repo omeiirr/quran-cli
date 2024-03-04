@@ -18,6 +18,7 @@ func init() {
 	rootCmd.AddCommand(versionCmd)
 
 	searchCmd.Flags().BoolP("exact", "e", false, "Uses exact match for keyword instead of fuzzy match")
+	readCmd.Flags().BoolP("arabic", "a", false, "Shows Arabic text along with the English translation")
 
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 }
@@ -81,10 +82,13 @@ var readCmd = &cobra.Command{
 			fmt.Println("Chapter not found; enter a valid chapter number between 1 to 114")
 			return
 		}
-		switch len(args) {
 
+		showArabic, _ := cmd.Flags().GetBool("arabic")
+		fmt.Println(showArabic)
+
+		switch len(args) {
 		case 1:
-			functions.PrintSurah(surahNo)
+			functions.PrintSurah(surahNo, showArabic)
 
 		case 2:
 			ayatNo, err := strconv.Atoi(args[1])
@@ -92,7 +96,7 @@ var readCmd = &cobra.Command{
 				fmt.Printf("Verse not found; chapter %v has a total of %d verses.\n", data.QuranPayload[surahNo-1].Transliteration, data.QuranPayload[surahNo-1].TotalVerses)
 				return
 			}
-			functions.PrintAyat(surahNo, ayatNo)
+			functions.PrintAyat(surahNo, ayatNo, showArabic)
 
 		default:
 			fmt.Println(`Too many arguments. Use "quran read --help" for more`)
