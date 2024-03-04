@@ -9,6 +9,17 @@ import (
 
 func PrintAyat(surahNo int, ayatNo int) {
 
+	if surahNo < 1 || surahNo > 114 {
+		fmt.Println("Chapter not found; enter a valid chapter number")
+		return
+	}
+	if ayatNo < 1 || ayatNo > data.QuranPayload[surahNo-1].TotalVerses {
+
+		fmt.Printf("Verse not found; chapter %v has a total of %d verses.", data.QuranPayload[surahNo-1].Transliteration, data.QuranPayload[surahNo-1].TotalVerses)
+		return
+
+	}
+
 	fmt.Println(
 		lipgloss.NewStyle().
 			Foreground(lipgloss.Color(data.Cfg.ThemeColor)).

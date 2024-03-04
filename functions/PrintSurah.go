@@ -9,6 +9,10 @@ import (
 
 func PrintSurah(surahNo int) {
 
+	if surahNo < 1 || surahNo > 114 {
+		fmt.Println("Chapter not found; enter a valid chapter number between 1 to 114")
+		return
+	}
 	// if len(verseRange) == 0 {
 	// 	verseRange[0] = 1
 	// 	verseRange[1] = data.ChaptersPayload[surahNo].TotalVerses
