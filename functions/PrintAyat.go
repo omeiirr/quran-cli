@@ -38,6 +38,6 @@ func PrintAyat(surahNo int, ayatNo int) {
 		)
 	}
 
-	fmt.Printf("\nTafsir: https://quran.com/%v:%v/tafsirs/en-tafisr-ibn-kathir\n", surahNo, ayatNo)
+	fmt.Printf("\nTafsir: https://quran.com/%v:%v/tafsirs/%v\n", surahNo, ayatNo, data.Cfg.Tafsir)
 
 }

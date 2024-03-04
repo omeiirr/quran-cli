@@ -11,4 +11,4 @@ print_ayat:
 
 tafsir: 'en-tafisr-ibn-kathir'
 # tafsir: 'en-tafsir-maarif-ul-quran'
-# tafsir: "tazkirul-quran-en"
+# tafsir: 'tazkirul-quran-en'
