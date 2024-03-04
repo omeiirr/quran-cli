@@ -20,7 +20,7 @@ func init() {
 
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath(".")
+	viper.AddConfigPath("$HOME/.quran")
 	err := viper.ReadInConfig()
 	if err != nil {
 		fmt.Println("Unable to read config:", err)
