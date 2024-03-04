@@ -8,3 +8,7 @@ print_surah:
 
 print_ayat:
   show_arabic: false
+
+tafsir: 'en-tafisr-ibn-kathir'
+# tafsir: 'en-tafsir-maarif-ul-quran'
+# tafsir: "tazkirul-quran-en"
