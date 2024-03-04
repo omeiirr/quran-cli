@@ -11,7 +11,7 @@ import (
 var ChaptersPayload []models.Surah
 var QuranPayload []models.Surah
 
-var ThemeColor string
+var Cfg models.Config
 
 func LoadData(chaptersContent, quranContent []byte) {
 
@@ -25,6 +25,8 @@ func LoadData(chaptersContent, quranContent []byte) {
 		log.Fatal("Error during Unmarshal(): ", err)
 	}
 
-	ThemeColor = viper.GetString("theme_color")
+	if err := viper.Unmarshal(&Cfg); err != nil {
+		panic(err)
+	}
 
 }
