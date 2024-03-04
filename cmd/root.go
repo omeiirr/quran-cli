@@ -16,6 +16,8 @@ func init() {
 	rootCmd.AddCommand(readCmd)
 	rootCmd.AddCommand(searchCmd)
 	rootCmd.AddCommand(versionCmd)
+
+	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 }
 
 var rootCmd = &cobra.Command{
