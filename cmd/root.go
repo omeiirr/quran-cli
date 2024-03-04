@@ -39,6 +39,7 @@ var listCmd = &cobra.Command{
 	Press Enter to read the highlighted chapter.
 	Press q to exit the table.
 	`,
+	Args: cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		functions.ListSurahs()
 	},
@@ -47,7 +48,8 @@ var listCmd = &cobra.Command{
 var randomCmd = &cobra.Command{
 	Use:   "random",
 	Short: "Print a random verse from the Quran.",
-	Long:  `Print a random verse from the Quran.`,
+	Long:  "Print a random verse from the Quran.",
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		functions.SelectRandomVerse()
 	},
@@ -61,6 +63,7 @@ var readCmd = &cobra.Command{
 	First argument is the chapter number.
 	Second optional argument is the verse number.	
 	`,
+	Args: cobra.RangeArgs(1, 2),
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			fmt.Println(`Not enough arguments. Use "quran read --help" for more`)
@@ -98,6 +101,7 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print the version number of quran-cli",
 	Long:  `All software has versions. This is for quran-cli.`,
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("quran-cli \t v.0.1 -- HEAD")
 	},
