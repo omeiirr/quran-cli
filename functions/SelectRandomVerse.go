@@ -29,7 +29,7 @@ func SelectRandomVerse() models.Ayat {
 
 	fmt.Println(
 		lipgloss.NewStyle().
-			Foreground(lipgloss.Color(data.ThemeColor)).Render(selectedAyat.Translation))
+			Foreground(lipgloss.Color(data.Cfg.ThemeColor)).Render(selectedAyat.Translation))
 
 	fmt.Printf("\nTafsir: https://quran.com/%v:%v/tafsirs/en-tafisr-ibn-kathir\n", surahNo+1, ayatNo+1)
 	return selectedAyat

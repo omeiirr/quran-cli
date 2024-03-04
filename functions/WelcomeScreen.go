@@ -12,7 +12,7 @@ func WelcomeScreen() {
 	fmt.Println(lipgloss.NewStyle().
 		// Bold(true).
 		Foreground(lipgloss.Color("#FAFAFA")).
-		Background(lipgloss.Color(data.ThemeColor)).
+		Background(lipgloss.Color(data.Cfg.ThemeColor)).
 		Padding(1, 2, 1).
 		Width(56).
 		Margin(1, 2, 1).

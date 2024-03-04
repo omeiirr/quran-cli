@@ -89,11 +89,11 @@ func ListSurahs() {
 		BorderForeground(lipgloss.Color("240")).
 		BorderBottom(true).
 		Bold(true).
-		Foreground(lipgloss.Color(data.ThemeColor))
+		Foreground(lipgloss.Color(data.Cfg.ThemeColor))
 
 	s.Selected = s.Selected.
 		Foreground(lipgloss.Color("#FAFAFA")).
-		Background(lipgloss.Color(data.ThemeColor)).
+		Background(lipgloss.Color(data.Cfg.ThemeColor)).
 		Bold(false)
 
 	t.SetStyles(s)
@@ -110,7 +110,7 @@ func printSurah(surahNo int) {
 	fmt.Println(
 
 		lipgloss.NewStyle().
-			Foreground(lipgloss.Color(data.ThemeColor)).
+			Foreground(lipgloss.Color(data.Cfg.ThemeColor)).
 			Bold(true).
 			Render(
 				fmt.Sprintf(

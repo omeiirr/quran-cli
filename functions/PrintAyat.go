@@ -12,7 +12,7 @@ func PrintAyat(surahNo int, ayatNo int) {
 
 	fmt.Println(
 		lipgloss.NewStyle().
-			Foreground(lipgloss.Color(data.ThemeColor)).
+			Foreground(lipgloss.Color(data.Cfg.ThemeColor)).
 			Bold(true).
 			Render(
 				fmt.Sprintf(
