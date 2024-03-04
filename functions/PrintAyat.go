@@ -5,7 +5,6 @@ import (
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/omeiirr/quran-cli/data"
-	"github.com/spf13/viper"
 )
 
 func PrintAyat(surahNo int, ayatNo int) {
@@ -21,9 +20,7 @@ func PrintAyat(surahNo int, ayatNo int) {
 			),
 	)
 
-	showArabic := viper.GetBool("print_ayat.show_arabic")
-
-	if showArabic {
+	if data.Cfg.PrintAyat.ShowArabic {
 
 		fmt.Printf(
 			"\n%v\n%v\n",
