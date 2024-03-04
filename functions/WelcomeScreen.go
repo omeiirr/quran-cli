@@ -8,9 +8,7 @@ import (
 )
 
 func WelcomeScreen() {
-	// Welcome screen
 	fmt.Println(lipgloss.NewStyle().
-		// Bold(true).
 		Foreground(lipgloss.Color("#FAFAFA")).
 		Background(lipgloss.Color(data.Cfg.ThemeColor)).
 		Padding(1, 2, 1).
