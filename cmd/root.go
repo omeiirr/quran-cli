@@ -14,6 +14,7 @@ func init() {
 	rootCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(randomCmd)
 	rootCmd.AddCommand(readCmd)
+	rootCmd.AddCommand(searchCmd)
 	rootCmd.AddCommand(versionCmd)
 }
 
@@ -94,6 +95,23 @@ var readCmd = &cobra.Command{
 
 		}
 
+	},
+}
+var searchCmd = &cobra.Command{
+	Use:   "search [query]",
+	Short: "Search the Quran for verses containing a given query",
+	Long:  `Search the Quran for verses containing a given query using fzf (fuzzy search).`,
+	Run: func(cmd *cobra.Command, args []string) {
+		var err error
+		if len(args) == 0 {
+			err = functions.SearchText("")
+		} else {
+			err = functions.SearchText(args[0])
+		}
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
 	},
 }
 
