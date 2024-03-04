@@ -35,7 +35,7 @@ func SearchText(query string) error {
 	}
 
 	// Use FZF to display the matching verses
-	fzfCmd := exec.Command("fzf")
+	fzfCmd := exec.Command("fzf", fmt.Sprintf("--color=hl:%s", data.Cfg.ThemeColor))
 	fzfCmd.Stdin = strings.NewReader(strings.Join(matchingVerses, "\n"))
 	fzfCmd.Stdout = os.Stdout
 	fzfCmd.Stderr = os.Stderr
