@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/omeiirr/quran-cli/data"
 	"github.com/omeiirr/quran-cli/functions"
 	"github.com/spf13/cobra"
 )
@@ -66,8 +67,8 @@ var readCmd = &cobra.Command{
 		// string to int
 		surahNo, err := strconv.Atoi(args[0])
 		if err != nil {
-
-			panic(err)
+			fmt.Println("Chapter not found; enter a valid chapter number between 1 to 114")
+			return
 		}
 
 		switch len(args) {
@@ -80,24 +81,25 @@ var readCmd = &cobra.Command{
 		case 2:
 			ayatNo, err := strconv.Atoi(args[1])
 			if err != nil {
-				panic(err)
+				fmt.Printf("Verse not found; chapter %v has a total of %d verses.", data.QuranPayload[surahNo-1].Transliteration, data.QuranPayload[surahNo-1].TotalVerses)
+				return
 			}
 			functions.PrintAyat(surahNo, ayatNo)
-		case 3:
-			start, err := strconv.Atoi(args[1])
-			if err != nil {
-				panic(err)
-			}
-			end, err := strconv.Atoi(args[2])
-			if err != nil {
-				panic(err)
-			}
-			x := [2]int{start, end}
-			fmt.Println(x)
-			functions.PrintSurah(surahNo)
-			// for i := start; i <= end; i++ {
-			// 	functions.PrintAyat(surahNo, i)
-			// }
+		// case 3:
+		// 	start, err := strconv.Atoi(args[1])
+		// 	if err != nil {
+		// 		panic(err)
+		// 	}
+		// 	end, err := strconv.Atoi(args[2])
+		// 	if err != nil {
+		// 		panic(err)
+		// 	}
+		// 	x := [2]int{start, end}
+		// 	fmt.Println(x)
+		// 	functions.PrintSurah(surahNo)
+		// for i := start; i <= end; i++ {
+		// 	functions.PrintAyat(surahNo, i)
+		// }
 
 		default:
 			fmt.Println("Too many arguments")
