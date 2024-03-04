@@ -17,6 +17,8 @@ func init() {
 	rootCmd.AddCommand(searchCmd)
 	rootCmd.AddCommand(versionCmd)
 
+	searchCmd.Flags().BoolP("exact", "e", false, "Uses exact match for keyword instead of fuzzy match")
+
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 }
 
@@ -35,7 +37,7 @@ var rootCmd = &cobra.Command{
 
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "Lists all chapters/surahs from Quran.",
+	Short: "Lists all chapters/surahs from Quran",
 	Long: `
 	Lists all chapters/surahs from Quran in an interactive table. Select a chapter to read.
 	Use up/down arrow keys or k/j to move up down.
@@ -50,8 +52,8 @@ var listCmd = &cobra.Command{
 
 var randomCmd = &cobra.Command{
 	Use:   "random",
-	Short: "Print a random verse from the Quran.",
-	Long:  "Print a random verse from the Quran.",
+	Short: "Print a random verse from the Quran",
+	Long:  "Print a random verse from the Quran",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		functions.SelectRandomVerse()
@@ -60,7 +62,7 @@ var randomCmd = &cobra.Command{
 
 var readCmd = &cobra.Command{
 	Use:   "read surah [ayat]",
-	Short: "Prints entire chapter or a verse, depending on input.",
+	Short: "Prints entire chapter or a verse, depending on input",
 	Long: `
 	Prints entire chapter or a verse, depending on input.
 	First argument is the chapter number.
@@ -102,17 +104,20 @@ var readCmd = &cobra.Command{
 var searchCmd = &cobra.Command{
 	Use:   "search [query]",
 	Short: "Search the Quran for verses containing a given query",
-	Long:  `Search the Quran for verses containing a given query using fzf (fuzzy search).`,
+	Long:  `Search the Quran for verses containing a given query using fzf (both fuzzy search and exact match is possible).`,
 	Run: func(cmd *cobra.Command, args []string) {
+
+		exactMatch, _ := cmd.Flags().GetBool("exact")
+
 		var err error
 		if len(args) == 0 {
-			err = functions.SearchText("")
+			err = functions.SearchText("", exactMatch)
 		} else {
-			err = functions.SearchText(args[0])
+			err = functions.SearchText(args[0], exactMatch)
 		}
 		if err != nil {
 			fmt.Println(err)
-			os.Exit(1)
+			return
 		}
 	},
 }

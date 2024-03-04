@@ -9,7 +9,7 @@ import (
 	"github.com/omeiirr/quran-cli/data"
 )
 
-func SearchText(query string) error {
+func SearchText(query string, exactMatch bool) error {
 
 	// Concatenate all verses into a single slice of strings
 	var allVerses []string
@@ -36,6 +36,12 @@ func SearchText(query string) error {
 
 	// Use FZF to display the matching verses
 	fzfCmd := exec.Command("fzf", fmt.Sprintf("--color=hl:%s", data.Cfg.ThemeColor))
+
+	// Append the --exact flag if exactMatch is true
+	if exactMatch {
+		fzfCmd.Args = append(fzfCmd.Args, "--exact")
+	}
+
 	fzfCmd.Stdin = strings.NewReader(strings.Join(matchingVerses, "\n"))
 	fzfCmd.Stdout = os.Stdout
 	fzfCmd.Stderr = os.Stderr
