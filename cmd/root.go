@@ -62,17 +62,18 @@ var readCmd = &cobra.Command{
 	Second optional argument is the verse number.	
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// string to int
-		surahNo, err := strconv.Atoi(args[0])
-		if err != nil {
-			fmt.Println("Chapter not found; enter a valid chapter number between 1 to 114")
+		if len(args) == 0 {
+			fmt.Println(`Not enough arguments. Use "quran read --help" for more`)
 			return
 		}
 
+		// conert string to int
+		surahNo, err := strconv.Atoi(args[0])
+		if err != nil || surahNo > 114 {
+			fmt.Println("Chapter not found; enter a valid chapter number between 1 to 114")
+			return
+		}
 		switch len(args) {
-
-		case 0:
-			fmt.Println("Too few arguments")
 
 		case 1:
 			functions.PrintSurah(surahNo)
@@ -80,13 +81,13 @@ var readCmd = &cobra.Command{
 		case 2:
 			ayatNo, err := strconv.Atoi(args[1])
 			if err != nil {
-				fmt.Printf("Verse not found; chapter %v has a total of %d verses.", data.QuranPayload[surahNo-1].Transliteration, data.QuranPayload[surahNo-1].TotalVerses)
+				fmt.Printf("Verse not found; chapter %v has a total of %d verses.\n", data.QuranPayload[surahNo-1].Transliteration, data.QuranPayload[surahNo-1].TotalVerses)
 				return
 			}
 			functions.PrintAyat(surahNo, ayatNo)
 
 		default:
-			fmt.Println("Too many arguments")
+			fmt.Println(`Too many arguments. Use "quran read --help" for more`)
 
 		}
 
