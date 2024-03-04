@@ -63,6 +63,8 @@ func ListSurahs() {
 		{Title: "Type", Width: 10},
 	}
 
+	fmt.Println("\nUse arrow keys or j/k to navigate. Press ENTER on a surah to display it.")
+
 	var rows []table.Row
 	for _, surah := range data.ChaptersPayload {
 		row := []string{
