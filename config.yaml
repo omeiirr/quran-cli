@@ -1,16 +1,18 @@
-# Global theme color
+### Global theme color
 theme_color: '#04B575' # dark green
 # theme_color: '#ff7373' # salmon
 # theme_color: '#468499' # blue
 # theme_color: '#8a2be2' # violet
 
-# Options for Tafsir on quran.com
+### Options for Tafsir on quran.com
 tafsir: 'en-tafisr-ibn-kathir'
 # tafsir: 'en-tafsir-maarif-ul-quran'
 # tafsir: 'tazkirul-quran-en'
 
 print_surah:
+  # You might need to add an Arabic font to your terminal emulator to correctly display the Arabic text
   show_arabic: false
 
 print_ayat:
+  # You might need to add an Arabic font to your terminal emulator to correctly display the Arabic text
   show_arabic: false
