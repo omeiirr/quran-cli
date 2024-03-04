@@ -115,7 +115,7 @@ func printSurah(surahNo int) {
 			Render(
 				fmt.Sprintf(
 
-					"\nSurah %v | %v (%v) | %v",
+					"\nSurah %v | %v (%v) | %v\n",
 					data.QuranPayload[surahNo-1].Id,
 					data.QuranPayload[surahNo-1].Transliteration,
 					data.QuranPayload[surahNo-1].Translation,
