@@ -38,7 +38,7 @@ func SearchText(query string, exactMatch bool) error {
 	fzfCmd := exec.Command("fzf", fmt.Sprintf("--color=hl:%s,hl+:%s", data.Cfg.ThemeColor, data.Cfg.ThemeColor))
 
 	// Append the --exact flag if exactMatch is true
-	if exactMatch {
+	if data.Cfg.Search.ExactMatch || exactMatch {
 		fzfCmd.Args = append(fzfCmd.Args, "--exact")
 	}
 
