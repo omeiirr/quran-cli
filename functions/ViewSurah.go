@@ -46,10 +46,14 @@ func ViewSurah(surahNo int, showArabic bool) {
 	var content []string
 	if surahNo > 0 {
 		surah := data.QuranPayload[surahNo-1]
-		// fmt.Print(len(surah.Verses))
 		content = append(content, "\n")
 		for _, ayat := range surah.Verses {
-			verseString := fmt.Sprintf("%d:%d  %s", surah.Id, ayat.Id, ayat.Translation)
+			var verseString string
+			if data.Cfg.PrintSurah.ShowArabic || showArabic {
+				verseString = fmt.Sprintf("%s\n%d.  %s", ayat.Text, ayat.Id, ayat.Translation)
+			} else {
+				verseString = fmt.Sprintf("%d.  %s", ayat.Id, ayat.Translation)
+			}
 			content = append(content, verseString)
 		}
 	}
