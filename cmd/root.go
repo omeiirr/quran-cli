@@ -16,6 +16,7 @@ func init() {
 
 	rootCmd.AddCommand(readCmd)
 	readCmd.Flags().BoolP("arabic", "a", false, "Shows Arabic text along with the English translation")
+	readCmd.Flags().BoolP("interactive", "i", false, "Shows the surah in an interactive window, instead of printing out to the console [experimental feature]")
 
 	rootCmd.AddCommand(searchCmd)
 	searchCmd.Flags().BoolP("exact", "e", false, "Uses exact match for keyword instead of fuzzy match")
@@ -91,10 +92,15 @@ Second optional argument is the verse number.
 		}
 
 		showArabic, _ := cmd.Flags().GetBool("arabic")
+		interactive, _ := cmd.Flags().GetBool("interactive")
 
 		switch len(args) {
 		case 1:
-			functions.PrintSurah(surahNo, showArabic)
+			if interactive {
+				functions.ViewSurah(surahNo, showArabic)
+			} else {
+				functions.PrintSurah(surahNo, showArabic)
+			}
 
 		case 2:
 			ayatNo, err := strconv.Atoi(args[1])
