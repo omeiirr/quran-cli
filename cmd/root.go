@@ -27,11 +27,11 @@ func init() {
 var rootCmd = &cobra.Command{
 	Use:   "quran",
 	Short: "A command line app to read Quran.",
-	Long:  `A command line app to read Quran, get daily verses, read chapters, and more.`,
+	Long:  `A command line app to read Quran, get daily verses, search across the Quran, and more.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		functions.WelcomeScreen()
-		fmt.Println(`
-  Assalamu alaikum warahmatullahi wabarakatuhu.
+		fmt.Println(`  Assalamu alaikum warahmatullahi wabarakatuhu.
+
   Use "quran help" for all available commands.
   Use "quran [command] --help" for more information about a command.`)
 	},
@@ -39,12 +39,11 @@ var rootCmd = &cobra.Command{
 
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "Lists all chapters/surahs from Quran",
-	Long: `
-	Lists all chapters/surahs from Quran in an interactive table. Select a chapter to read.
-	Use up/down arrow keys or k/j to move up down.
-	Press Enter to read the highlighted chapter.
-	Press q to exit the table.
+	Short: "List all chapters/surahs from Quran",
+	Long: `List all chapters/surahs from Quran in an interactive table. Select a chapter to read.
+Use up/down arrow keys or k/j to move up down.
+Press Enter to read the highlighted chapter.
+Press q to exit the table.
 	`,
 	Args:    cobra.NoArgs,
 	Aliases: []string{"l"},
@@ -65,11 +64,10 @@ var randomCmd = &cobra.Command{
 
 var readCmd = &cobra.Command{
 	Use:   "read surah [ayat]",
-	Short: "Prints entire chapter or a verse, depending on input",
-	Long: `
-	Prints entire chapter or a verse, depending on input.
-	First argument is the chapter number.
-	Second optional argument is the verse number.	
+	Short: "Print entire chapter or a verse, depending on input",
+	Long: `Print entire chapter or a verse, depending on input.
+First argument is the chapter number.
+Second optional argument is the verse number.	
 	`,
 	Args:    cobra.RangeArgs(1, 2),
 	Aliases: []string{"r"},
@@ -79,7 +77,7 @@ var readCmd = &cobra.Command{
 			return
 		}
 
-		// conert string to int
+		// convert string to int
 		surahNo, err := strconv.Atoi(args[0])
 		if err != nil || surahNo > 114 {
 			fmt.Println("Chapter not found; enter a valid chapter number between 1 to 114")
@@ -131,8 +129,8 @@ var searchCmd = &cobra.Command{
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Print the version number of quran-cli",
-	Long:  `All software has versions. This is for quran-cli.`,
+	Short: "Print the current version of quran-cli",
+	Long:  `Print the current version of quran-cli`,
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("quran-cli \t v.0.1 -- HEAD")
