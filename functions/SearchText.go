@@ -35,7 +35,7 @@ func SearchText(query string, exactMatch bool) error {
 	}
 
 	// Use FZF to display the matching verses
-	fzfCmd := exec.Command("fzf", fmt.Sprintf("--color=hl:%s", data.Cfg.ThemeColor))
+	fzfCmd := exec.Command("fzf", fmt.Sprintf("--color=hl:%s,hl+:%s", data.Cfg.ThemeColor, data.Cfg.ThemeColor))
 
 	// Append the --exact flag if exactMatch is true
 	if exactMatch {
