@@ -4,17 +4,24 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
+	"runtime"
 )
 
 func EditConfigSettings() {
 	configFile := getConfigFilePath()
 	editor := getEditor()
 
-	// Open the configuration file in the user's preferred editor
-	editCmd := exec.Command(editor, configFile)
-	editCmd.Stdin = os.Stdin
-	editCmd.Stdout = os.Stdout
-	editCmd.Stderr = os.Stderr
+	var editCmd *exec.Cmd
+	switch runtime.GOOS {
+	case "windows":
+		editCmd = exec.Command("cmd", "/c", "start", editor, configFile)
+	default:
+		editCmd = exec.Command(editor, configFile)
+		editCmd.Stdin = os.Stdin
+		editCmd.Stdout = os.Stdout
+		editCmd.Stderr = os.Stderr
+	}
 
 	err := editCmd.Run()
 	if err != nil {
@@ -29,13 +36,19 @@ func getConfigFilePath() string {
 		fmt.Println("Error getting user's home directory:", err)
 		os.Exit(1)
 	}
-	return homeDir + "/.quran/config.yaml"
+	configFilePath := filepath.Join(homeDir, ".quran", "config.yaml")
+	return configFilePath
 }
 
 func getEditor() string {
 	editor := os.Getenv("EDITOR")
 	if editor == "" {
-		editor = "vi" // Default to vi if EDITOR environment variable is not set
+		switch runtime.GOOS {
+		case "windows":
+			editor = "notepad"
+		default:
+			editor = "vi" // Default to vi for Unix-like systems
+		}
 	}
 	return editor
 }
