@@ -13,13 +13,19 @@ import (
 func init() {
 	rootCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(randomCmd)
-	rootCmd.AddCommand(readCmd)
-	rootCmd.AddCommand(searchCmd)
-	rootCmd.AddCommand(versionCmd)
 
+	rootCmd.AddCommand(readCmd)
+	readCmd.Flags().BoolP("arabic", "a", false, "Shows Arabic text along with the English translation")
+
+	rootCmd.AddCommand(searchCmd)
 	searchCmd.Flags().BoolP("exact", "e", false, "Uses exact match for keyword instead of fuzzy match")
 	searchCmd.Flags().IntP("chapter", "c", 0, "Search only within the specified chapter (default: search in the whole Quran)")
-	readCmd.Flags().BoolP("arabic", "a", false, "Shows Arabic text along with the English translation")
+
+	rootCmd.AddCommand(configCmd)
+	configCmd.Flags().BoolP("list", "l", false, "List current configuration settings")
+	configCmd.Flags().BoolP("edit", "e", false, "Edit the configuration file")
+
+	rootCmd.AddCommand(versionCmd)
 
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 }
@@ -123,6 +129,25 @@ var searchCmd = &cobra.Command{
 		if err != nil {
 			fmt.Println(err)
 			return
+		}
+	},
+}
+
+var configCmd = &cobra.Command{
+	Use:   "config",
+	Short: "Manage configuration settings",
+	Long:  `Manage configuration settings for the quran-cli application.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		listFlag, _ := cmd.Flags().GetBool("list")
+		editFlag, _ := cmd.Flags().GetBool("edit")
+
+		if listFlag {
+			functions.ListConfigSettings()
+		} else if editFlag {
+			functions.EditConfigSettings()
+		} else {
+			// Display help if no flags are provided
+			cmd.Help()
 		}
 	},
 }
