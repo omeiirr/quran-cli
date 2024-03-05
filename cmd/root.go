@@ -18,6 +18,7 @@ func init() {
 	rootCmd.AddCommand(versionCmd)
 
 	searchCmd.Flags().BoolP("exact", "e", false, "Uses exact match for keyword instead of fuzzy match")
+	searchCmd.Flags().IntP("chapter", "c", 0, "Search only within the specified chapter (default: search in the whole Quran)")
 	readCmd.Flags().BoolP("arabic", "a", false, "Shows Arabic text along with the English translation")
 
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
@@ -86,7 +87,6 @@ var readCmd = &cobra.Command{
 		}
 
 		showArabic, _ := cmd.Flags().GetBool("arabic")
-		fmt.Println(showArabic)
 
 		switch len(args) {
 		case 1:
@@ -113,14 +113,14 @@ var searchCmd = &cobra.Command{
 	Long:    `Search the Quran for verses containing a given query using fzf (both fuzzy search and exact match is possible).`,
 	Aliases: []string{"s"},
 	Run: func(cmd *cobra.Command, args []string) {
-
 		exactMatch, _ := cmd.Flags().GetBool("exact")
+		chapterNo, _ := cmd.Flags().GetInt("chapter")
 
 		var err error
 		if len(args) == 0 {
-			err = functions.SearchText("", exactMatch)
+			err = functions.SearchText("", exactMatch, chapterNo)
 		} else {
-			err = functions.SearchText(args[0], exactMatch)
+			err = functions.SearchText(args[0], exactMatch, chapterNo)
 		}
 		if err != nil {
 			fmt.Println(err)

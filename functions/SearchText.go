@@ -9,20 +9,33 @@ import (
 	"github.com/omeiirr/quran-cli/data"
 )
 
-func SearchText(query string, exactMatch bool) error {
+func SearchText(query string, exactMatch bool, chapterNo int) error {
 
-	// Concatenate all verses into a single slice of strings
-	var allVerses []string
-	for _, surah := range data.QuranPayload {
+	if chapterNo > 114 {
+		return fmt.Errorf("Chapter not found; enter a valid chapter number between 1 to 114")
+	}
+
+	// Concatenate verses into a slice of strings for the specified Surah
+	var versesToSearch []string
+	if chapterNo > 0 {
+		surah := data.QuranPayload[chapterNo-1]
 		for _, ayat := range surah.Verses {
 			verseString := fmt.Sprintf("%d:%d \t %s", surah.Id, ayat.Id, ayat.Translation)
-			allVerses = append(allVerses, verseString)
+			versesToSearch = append(versesToSearch, verseString)
+		}
+	} else {
+		// Concatenate all verses into a single slice of strings
+		for _, surah := range data.QuranPayload {
+			for _, ayat := range surah.Verses {
+				verseString := fmt.Sprintf("%d:%d \t %s", surah.Id, ayat.Id, ayat.Translation)
+				versesToSearch = append(versesToSearch, verseString)
+			}
 		}
 	}
 
 	// Filter the verses that contain the given query
 	var matchingVerses []string
-	for _, verse := range allVerses {
+	for _, verse := range versesToSearch {
 		if strings.Contains(strings.ToLower(verse), strings.ToLower(query)) {
 			matchingVerses = append(matchingVerses, verse)
 		}
