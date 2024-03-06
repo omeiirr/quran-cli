@@ -162,9 +162,8 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print the current version of quran-cli",
 	Long:  `Print the current version of quran-cli`,
-	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("quran-cli \t v.0.1 -- HEAD")
+		fmt.Println("quran-cli \t v.0.1")
 	},
 }
 
