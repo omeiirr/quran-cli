@@ -2,7 +2,7 @@
 
 Quran CLI is a command-line application designed to help users read the Quran, fuzzy search the entire Quran for keywords, access daily verses, and more.
 
-[quran-cli-demo.webm](https://github.com/omeiirr/quran-cli/assets/54888682/1d762646-6895-4244-be35-0a031b35950e)
+[quran-cli-demo.webm](https://github.com/omeiirr/quran-cli/assets/54888682/0af0e82e-9f71-44cd-a027-9b58bc3bd695)
 
 
 ## Contents
