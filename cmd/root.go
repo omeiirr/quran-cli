@@ -185,8 +185,8 @@ var hadithCmd = &cobra.Command{
 
 var readHadithCmd = &cobra.Command{
 	Use:   "read [book] [id]",
-	Short: "Read a specific hadith from a book",
-	Long:  "Read a specific hadith from a book by providing the book name and hadith ID",
+	Short: "Read a specific hadith from a book. Available: 'bukhari'",
+	Long:  "Read a specific hadith from a book by providing the book name and hadith number. Available: 'bukhari'",
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) != 2 {
 			fmt.Println("Invalid number of arguments. Usage: quran hadith read [book] [id]")
