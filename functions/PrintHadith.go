@@ -30,5 +30,5 @@ func PrintHadith(book string, hadithID int, showArabic bool) {
 
 	fmt.Println(hadith.English.Narrator)
 	fmt.Println(hadith.English.Text)
-	fmt.Printf("\n\nMore info: https://sunnah.com/%s:%d\n", book, hadith.IDInBook)
+	fmt.Printf("\nMore info: https://sunnah.com/%s:%d\n", book, hadith.IDInBook)
 }
