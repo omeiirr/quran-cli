@@ -7,14 +7,14 @@ Quran CLI is a command-line application designed to help users read the Quran, f
 
 ## Contents
 
-1. Introduction
-2. Installation
-3. Pre-requisites
-4. Usage
-5. License
-6. Acknowledgements
+- [Installation](https://github.com/omeiirr/quran-cli#installation)
+- [Usage](https://github.com/omeiirr/quran-cli#usage)
+- [License](https://github.com/omeiirr/quran-cli#license)
+- [Contributing](https://github.com/omeiirr/quran-cli#contributing)
 
 ## Installation
+
+The following options are available for installation:
 
 1. Run the install script
 
@@ -26,31 +26,28 @@ Quran CLI is a command-line application designed to help users read the Quran, f
 go install github.com/omeiirr/quran-cli
 ```
 
-Usage
+## Usage
 
 Once installed, you can use Quran CLI with the following commands:
 
-`quran help` Lists all available commands.
+- `quran help` Lists all available commands.
+- `quran list` Lists all chapters/surahs from the Quran. Allows you to select a chapter to read.
+- `quran random` Prints a random verse from the Quran.
+- `quran read [surah] [ayat]` Prints an entire chapter or a verse, depending on the input. 
 
-`quran list` Lists all chapters/surahs from the Quran. Allows you to select a chapter to read.
+   Specify the chapter number (surah) and an optional verse number (ayat).
+- `quran search`: Search the Quran for verses containing a given query.
 
-`quran random` Prints a random verse from the Quran.
+   If you want to search within a specific chapter, for instance the 3rd chapter,
 
-`quran read [surah] [ayat]` Prints an entire chapter or a verse, depending on the input.
-
-Specify the chapter number (surah) and an optional verse number (ayat).
-
-`quran search`: Search the Quran for verses containing a given query.
-
-If you want to search within a specific chapter, for instance the 3rd chapter, , you can use `quran search --chapter 3 <query>` or `quran search -c3 <query>`
-
-`quran version`: Prints the version number of quran-cli.
+   you can use `quran search --chapter 3 <query>` or `quran search -c3 <query>`
+- `quran version`: Prints the version number of quran-cli.
 
 Use `quran [command] --help` for more information about a command.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/omeiirr/quran-cli/blob/main/LICENSE) file for details.
 
 ## Contributing
 
