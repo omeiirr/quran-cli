@@ -10,6 +10,7 @@ import (
 
 var ChaptersPayload []models.Surah
 var QuranPayload []models.Surah
+var HadithPayload models.HadithBook
 
 var Cfg models.Config
 
@@ -29,4 +30,11 @@ func LoadData(chaptersContent, quranContent []byte) {
 		panic(err)
 	}
 
+}
+
+func LoadHadith(hadithContent []byte) {
+	err := json.Unmarshal(hadithContent, &HadithPayload)
+	if err != nil {
+		log.Fatal("Error during Unmarshal(): ", err)
+	}
 }
