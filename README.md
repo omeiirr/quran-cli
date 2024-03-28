@@ -28,6 +28,49 @@ go install github.com/omeiirr/quran-cli
 
 ## Usage
 
+```
+❯ quran --help
+A command line app to read Quran, get daily verses, search across the Quran, and more.
+
+Usage:
+  quran [flags]
+  quran [command]
+
+Available Commands:
+  config      Manage configuration settings
+  hadith      Interact with hadiths
+  help        Help about any command
+  list        List all chapters/surahs from Quran
+  random      Print a random verse from the Quran
+  read        Print entire chapter or a verse, depending on input
+  search      Search the Quran for verses containing a given query
+  version     Print the current version of quran-cli
+
+Flags:
+  -h, --help   help for quran
+
+Use "quran [command] --help" for more information about a command.
+```
+
+```
+❯ quran hadith --help
+Interact with hadiths from different books and collections
+
+Usage:
+  quran hadith [flags]
+  quran hadith [command]
+
+Available Commands:
+  read        Read a specific hadith from a book. Available: 'bukhari'
+  search      Search the Hadiths containing a given query
+
+Flags:
+  -h, --help   help for hadith
+
+Use "quran hadith [command] --help" for more information about a command.
+
+```
+
 Once installed, you can use Quran CLI with the following commands:
 
 - `quran help` Lists all available commands.
