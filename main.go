@@ -16,6 +16,9 @@ var chaptersContent []byte
 //go:embed data/Quran.json
 var quranContent []byte
 
+//go:embed data/hadith/bukhari.json
+var hadithContent []byte
+
 func init() {
 
 	viper.SetConfigName("config")
@@ -26,6 +29,7 @@ func init() {
 		fmt.Println("Unable to read config:", err)
 	}
 	data.LoadData(chaptersContent, quranContent)
+	data.LoadHadith(hadithContent)
 }
 
 func main() {
