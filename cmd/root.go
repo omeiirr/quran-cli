@@ -29,6 +29,13 @@ func init() {
 	rootCmd.AddCommand(versionCmd)
 
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
+
+	// Hadith commands
+	rootCmd.AddCommand(hadithCmd)
+	hadithCmd.AddCommand(readHadithCmd)
+	hadithCmd.AddCommand(searchHadithCmd)
+	searchHadithCmd.Flags().BoolP("exact", "e", false, "Uses exact match for keyword instead of fuzzy match")
+
 }
 
 var rootCmd = &cobra.Command{
@@ -164,6 +171,58 @@ var versionCmd = &cobra.Command{
 	Long:  `Print the current version of quran-cli`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("quran-cli \t v.0.1")
+	},
+}
+
+var hadithCmd = &cobra.Command{
+	Use:   "hadith",
+	Short: "Read or search for hadiths",
+	Long:  "Read or search for hadiths from different books and collections",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("Please specify a subcommand. Use 'quran hadith --help' for more information.")
+	},
+}
+
+var readHadithCmd = &cobra.Command{
+	Use:   "read [book] [id]",
+	Short: "Read a specific hadith from a book",
+	Long:  "Read a specific hadith from a book by providing the book name and hadith ID",
+	Run: func(cmd *cobra.Command, args []string) {
+		if len(args) != 2 {
+			fmt.Println("Invalid number of arguments. Usage: quran hadith read [book] [id]")
+			return
+		}
+
+		bookName := args[0]
+		hadithID, err := strconv.Atoi(args[1])
+		if err != nil {
+			fmt.Println("Error: Invalid Hadith ID")
+			return
+		}
+
+		functions.PrintHadith(bookName, hadithID, true)
+	},
+}
+
+var searchHadithCmd = &cobra.Command{
+	Use:     "search [query]",
+	Short:   "Search the Hadiths containing a given query",
+	Long:    `Search the Hadiths containing a given query using fzf (both fuzzy search and exact match is possible).`,
+	Aliases: []string{"s"},
+	Run: func(cmd *cobra.Command, args []string) {
+		exactMatch, _ := cmd.Flags().GetBool("exact")
+		chapterNo, _ := cmd.Flags().GetInt("chapter")
+
+		var err error
+		if len(args) == 0 {
+			err = functions.SearchHadith("", exactMatch, chapterNo)
+		} else {
+			err = functions.SearchHadith(args[0], exactMatch, chapterNo)
+		}
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 	},
 }
 
