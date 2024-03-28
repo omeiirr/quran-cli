@@ -48,7 +48,7 @@ func SearchText(query string, exactMatch bool, chapterNo int) error {
 	}
 
 	// Use FZF to display the matching verses
-	fzfCmd := exec.Command("fzf", "--reverse", fmt.Sprintf("--color=hl:%s,hl+:%s,pointer:%s", data.Cfg.ThemeColor, data.Cfg.ThemeColor, data.Cfg.ThemeColor))
+	fzfCmd := exec.Command("fzf", "-m", "--reverse", fmt.Sprintf("--color=hl:%s,hl+:%s,pointer:%s", data.Cfg.ThemeColor, data.Cfg.ThemeColor, data.Cfg.ThemeColor))
 
 	// Append the --exact flag if exactMatch is true
 	if data.Cfg.Search.ExactMatch || exactMatch {
