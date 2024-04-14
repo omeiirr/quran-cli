@@ -23,7 +23,7 @@ The following options are available for installation:
 3. Install it using Go
 
 ```bash
-go install github.com/omeiirr/quran-cli
+go install github.com/omeiirr/quran-cli@latest
 ```
 
 ## Usage
