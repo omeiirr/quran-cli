@@ -16,16 +16,30 @@ Quran CLI is a command-line application designed to help users read the Quran, f
 
 The following options are available for installation:
 
-1. Run the install script
+1. Run the install script (only for Linux and Mac)
+   ```
+   curl https://github.com/omeiirr/quran-cli/blob/main/install.sh | bash
+   ```
 
-2. Download a pre-compiled binary for your operating system from the releases page
+3. Download a pre-compiled binary for your operating system from the releases page
 
-3. Install it using Go
+4. Install it using Go
+    ```bash
+      go install github.com/omeiirr/quran-cli@latest
+    ```
+5. Install on Windows
+    1. Download [quran.exe](https://github.com/youruser/yourapp/releases/latest)
 
-```bash
-go install github.com/omeiirr/quran-cli@latest
-```
-
+    2. Move quran.exe to a folder like C:\Program Files\quran
+  
+    3. Add that folder to the system PATH:
+        - Open Start > “Environment Variables”
+        - Add the folder to Path
+  
+    4. Open Command Prompt or PowerShell:
+        ```
+        quran.exe
+        ```
 ## Usage
 
 ```
